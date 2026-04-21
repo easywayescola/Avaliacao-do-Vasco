@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação Vasco — Barra do Sahy | Cadastro de Atletas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@300;400;500;600;700;800&family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–black: #0a0a0a;
+–white: #ffffff;
+–cream: #f5f2ec;
+–red: #cc0000;
+–red-dark: #8b0000;
+–gray-900: #1a1a1a;
+–gray-700: #3d3d3d;
+–gray-500: #707070;
+–gray-300: #c4c4c4;
+–gray-100: #ededed;
+–gray-50: #f8f8f8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: ‘Manrope’, sans-serif;
+background: var(–cream);
+color: var(–black);
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+}
+
+/* ============ HERO ============ */
+.hero {
+background: var(–black);
+color: var(–white);
+padding: 60px 24px 80px;
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: -50%;
+right: -20%;
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(204,0,0,0.25), transparent 60%);
+pointer-events: none;
+}
+
+.hero::after {
+content: ‘VASCO’;
+position: absolute;
+bottom: -80px;
+right: -30px;
+font-family: ‘Anton’, sans-serif;
+font-size: clamp(120px, 25vw, 280px);
+color: rgba(255,255,255,0.035);
+letter-spacing: -0.04em;
+line-height: 0.9;
+pointer-events: none;
+user-select: none;
+}
+
+.hero-inner {
+max-width: 1100px;
+margin: 0 auto;
+position: relative;
+z-index: 2;
+}
+
+.hero-tag {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+background: var(–red);
+color: var(–white);
+padding: 8px 16px;
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+margin-bottom: 28px;
+clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+padding-right: 28px;
+}
+
+.hero-tag::before {
+content: ‘●’;
+color: var(–white);
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.3; }
+}
+
+.hero h1 {
+font-family: ‘Anton’, sans-serif;
+font-size: clamp(48px, 10vw, 120px);
+line-height: 0.9;
+letter-spacing: -0.02em;
+margin-bottom: 24px;
+text-transform: uppercase;
+}
+
+.hero h1 .accent {
+color: var(–red);
+display: inline-block;
+transform: translateY(-4px);
+}
+
+.hero-sub {
+font-size: clamp(16px, 2vw, 20px);
+max-width: 600px;
+color: rgba(255,255,255,0.8);
+margin-bottom: 40px;
+font-weight: 300;
+}
+
+.hero-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 32px;
+padding-top: 32px;
+border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.meta-item {
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.meta-label {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–red);
+}
+
+.meta-value {
+font-family: ‘Archivo’, sans-serif;
+font-size: 18px;
+font-weight: 700;
+color: var(–white);
+}
+
+/* ============ PROGRESS ============ */
+.progress-wrap {
+background: var(–black);
+padding: 0 24px 40px;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.progress {
+max-width: 1100px;
+margin: 0 auto;
+background: var(–gray-900);
+border: 1px solid rgba(255,255,255,0.08);
+padding: 20px 24px;
+display: flex;
+align-items: center;
+gap: 16px;
+overflow-x: auto;
+}
+
+.step {
+display: flex;
+align-items: center;
+gap: 12px;
+flex-shrink: 0;
+opacity: 0.4;
+transition: opacity 0.3s;
+}
+
+.step.active { opacity: 1; }
+.step.done { opacity: 0.8; }
+
+.step-num {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+border: 2px solid rgba(255,255,255,0.3);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Archivo’, sans-serif;
+font-weight: 800;
+font-size: 13px;
+color: var(–white);
+transition: all 0.3s;
+}
+
+.step.active .step-num {
+background: var(–red);
+border-color: var(–red);
+}
+
+.step.done .step-num {
+background: var(–white);
+color: var(–black);
+border-color: var(–white);
+}
+
+.step-label {
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(–white);
+white-space: nowrap;
+}
+
+.step-divider {
+width: 24px;
+height: 1px;
+background: rgba(255,255,255,0.2);
+flex-shrink: 0;
+}
+
+/* ============ FORM ============ */
+.form-section {
+max-width: 780px;
+margin: 0 auto;
+padding: 60px 24px 80px;
+}
+
+.panel {
+background: var(–white);
+border: 1px solid var(–gray-100);
+padding: 48px 40px;
+display: none;
+animation: fadeIn 0.4s ease;
+}
+
+.panel.active { display: block; }
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+margin-bottom: 40px;
+padding-bottom: 24px;
+border-bottom: 3px solid var(–black);
+}
+
+.panel-num {
+font-family: ‘Archivo’, sans-serif;
+font-size: 13px;
+font-weight: 800;
+letter-spacing: 0.2em;
+color: var(–red);
+margin-bottom: 8px;
+text-transform: uppercase;
+}
+
+.panel h2 {
+font-family: ‘Anton’, sans-serif;
+font-size: clamp(32px, 5vw, 48px);
+line-height: 1;
+text-transform: uppercase;
+letter-spacing: -0.01em;
+}
+
+.panel-desc {
+color: var(–gray-500);
+font-size: 15px;
+margin-top: 12px;
+}
+
+.field {
+margin-bottom: 24px;
+}
+
+.field-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+}
+
+.field-row-3 {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 16px;
+}
+
+@media (max-width: 600px) {
+.field-row, .field-row-3 { grid-template-columns: 1fr; }
+.panel { padding: 32px 24px; }
+}
+
+label {
+display: block;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(–gray-700);
+margin-bottom: 8px;
+}
+
+label .req {
+color: var(–red);
+margin-left: 2px;
+}
+
+label .hint {
+font-size: 11px;
+font-weight: 400;
+text-transform: none;
+color: var(–gray-500);
+letter-spacing: 0;
+display: block;
+margin-top: 2px;
+}
+
+input[type=“text”],
+input[type=“tel”],
+input[type=“email”],
+input[type=“date”],
+input[type=“number”],
+select,
+textarea {
+width: 100%;
+padding: 14px 16px;
+border: 2px solid var(–gray-100);
+background: var(–white);
+font-family: ‘Manrope’, sans-serif;
+font-size: 15px;
+color: var(–black);
+transition: border-color 0.2s, background 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+outline: none;
+border-color: var(–black);
+background: var(–gray-50);
+}
+
+input.error, select.error, textarea.error {
+border-color: var(–red);
+background: #fff5f5;
+}
+
+textarea {
+min-height: 90px;
+resize: vertical;
+font-family: ‘Manrope’, sans-serif;
+}
+
+.error-msg {
+color: var(–red);
+font-size: 12px;
+font-weight: 600;
+margin-top: 6px;
+display: none;
+}
+
+.field.has-error .error-msg { display: block; }
+
+/* radio group */
+.radio-group {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.radio-group input[type=“radio”],
+.radio-group input[type=“checkbox”] {
+position: absolute;
+opacity: 0;
+pointer-events: none;
+}
+
+.radio-group label {
+cursor: pointer;
+padding: 10px 18px;
+border: 2px solid var(–gray-100);
+background: var(–white);
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.02em;
+text-transform: none;
+color: var(–gray-700);
+margin-bottom: 0;
+transition: all 0.2s;
+}
+
+.radio-group input:checked + label {
+background: var(–black);
+color: var(–white);
+border-color: var(–black);
+}
+
+.radio-group.has-error label {
+border-color: var(–red);
+}
+
+/* Autorização */
+.term {
+background: var(–gray-50);
+border-left: 4px solid var(–red);
+padding: 20px 24px;
+margin-bottom: 20px;
+}
+
+.term-title {
+font-weight: 700;
+font-size: 14px;
+margin-bottom: 10px;
+color: var(–black);
+}
+
+.term-text {
+font-size: 13px;
+color: var(–gray-700);
+margin-bottom: 14px;
+line-height: 1.6;
+}
+
+.checkbox-line {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+}
+
+.checkbox-line input[type=“checkbox”] {
+width: 20px;
+height: 20px;
+accent-color: var(–red);
+cursor: pointer;
+margin-top: 2px;
+flex-shrink: 0;
+}
+
+.checkbox-line label {
+font-size: 13px;
+font-weight: 600;
+text-transform: none;
+letter-spacing: 0;
+color: var(–black);
+margin: 0;
+cursor: pointer;
+}
+
+/* ============ BUTTONS ============ */
+.actions {
+display: flex;
+justify-content: space-between;
+gap: 16px;
+margin-top: 40px;
+padding-top: 32px;
+border-top: 1px solid var(–gray-100);
+}
+
+.btn {
+padding: 16px 32px;
+border: none;
+background: var(–black);
+color: var(–white);
+font-family: ‘Archivo’, sans-serif;
+font-size: 13px;
+font-weight: 800;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+cursor: pointer;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 10px;
+}
+
+.btn:hover {
+background: var(–red);
+transform: translateX(2px);
+}
+
+.btn-ghost {
+background: transparent;
+color: var(–black);
+border: 2px solid var(–black);
+}
+
+.btn-ghost:hover {
+background: var(–black);
+color: var(–white);
+transform: translateX(-2px);
+}
+
+.btn-full {
+width: 100%;
+justify-content: center;
+padding: 20px 32px;
+font-size: 14px;
+}
+
+.btn-whatsapp {
+background: #25D366;
+}
+
+.btn-whatsapp:hover {
+background: #1eb855;
+}
+
+/* ============ SUMMARY ============ */
+.summary {
+display: none;
+max-width: 780px;
+margin: 0 auto;
+padding: 60px 24px 80px;
+}
+
+.summary.active { display: block; }
+
+.summary-badge {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.summary-check {
+width: 72px;
+height: 72px;
+background: var(–black);
+color: var(–red);
+border-radius: 50%;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-size: 40px;
+margin-bottom: 20px;
+}
+
+.summary h2 {
+font-family: ‘Anton’, sans-serif;
+font-size: clamp(36px, 6vw, 56px);
+text-transform: uppercase;
+line-height: 1;
+}
+
+.summary-desc {
+color: var(–gray-700);
+font-size: 16px;
+max-width: 500px;
+margin: 16px auto 0;
+}
+
+.summary-data {
+background: var(–white);
+padding: 40px;
+border: 1px solid var(–gray-100);
+margin-bottom: 32px;
+}
+
+.summary-data h3 {
+font-family: ‘Archivo’, sans-serif;
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–red);
+margin-bottom: 16px;
+margin-top: 28px;
+padding-bottom: 10px;
+border-bottom: 2px solid var(–black);
+}
+
+.summary-data h3:first-child { margin-top: 0; }
+
+.summary-row {
+display: flex;
+justify-content: space-between;
+gap: 20px;
+padding: 10px 0;
+border-bottom: 1px dashed var(–gray-100);
+font-size: 14px;
+}
+
+.summary-row:last-child { border-bottom: none; }
+
+.summary-key {
+color: var(–gray-500);
+font-weight: 500;
+flex-shrink: 0;
+}
+
+.summary-val {
+color: var(–black);
+font-weight: 700;
+text-align: right;
+word-break: break-word;
+}
+
+.submit-options {
+display: grid;
+gap: 12px;
+}
+
+/* ============ FOOTER ============ */
+footer {
+background: var(–black);
+color: rgba(255,255,255,0.5);
+padding: 40px 24px;
+text-align: center;
+font-size: 13px;
+letter-spacing: 0.05em;
+}
+
+footer strong {
+color: var(–red);
+font-weight: 800;
+letter-spacing: 0.15em;
+}
+
+/* print */
+@media print {
+.hero, .progress-wrap, .form-section, footer, .submit-options { display: none !important; }
+.summary { display: block !important; padding: 0; }
+.summary-data { border: none; padding: 0; }
+body { background: white; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Inscrições Abertas</div>
+    <h1>Avaliação<br><span class="accent">Vasco</span> 2026</h1>
+    <p class="hero-sub">Cadastro oficial para participação na seletiva do Club de Regatas Vasco da Gama em Barra do Sahy. Preencha com atenção — todos os campos marcados com (*) são obrigatórios.</p>
+
+```
+<div class="hero-meta">
+  <div class="meta-item">
+    <span class="meta-label">Data</span>
+    <span class="meta-value">30 e 31 de Maio</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-label">Local</span>
+    <span class="meta-value">Barra do Sahy</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-label">Clube</span>
+    <span class="meta-value">CR Vasco da Gama</span>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ============ PROGRESS ============ -->
+
+<div class="progress-wrap">
+  <div class="progress">
+    <div class="step active" data-step="1">
+      <div class="step-num">1</div>
+      <div class="step-label">Atleta</div>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step" data-step="2">
+      <div class="step-num">2</div>
+      <div class="step-label">Responsável</div>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step" data-step="3">
+      <div class="step-num">3</div>
+      <div class="step-label">Saúde</div>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step" data-step="4">
+      <div class="step-num">4</div>
+      <div class="step-label">Autorizações</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FORM ============ -->
+
+<section class="form-section" id="formSection">
+  <form id="regForm" novalidate>
+
+```
+<!-- ===== PANEL 1 ===== -->
+<div class="panel active" data-panel="1">
+  <div class="panel-header">
+    <div class="panel-num">Etapa 01 de 04</div>
+    <h2>Dados do Atleta</h2>
+    <p class="panel-desc">Informações pessoais do candidato.</p>
+  </div>
+
+  <div class="field">
+    <label>Nome completo <span class="req">*</span></label>
+    <input type="text" name="nome" required>
+    <span class="error-msg">Campo obrigatório</span>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Data de nascimento <span class="req">*</span></label>
+      <input type="date" name="nascimento" required>
+      <span class="error-msg">Campo obrigatório</span>
+    </div>
+    <div class="field">
+      <label>CPF <span class="req">*</span><span class="hint">Ex: 000.000.000-00</span></label>
+      <input type="text" name="cpf" inputmode="numeric" required>
+      <span class="error-msg">Campo obrigatório</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Pé dominante <span class="req">*</span></label>
+    <div class="radio-group" data-name="pe">
+      <input type="radio" id="pe1" name="pe" value="Direito" required><label for="pe1">Direito</label>
+      <input type="radio" id="pe2" name="pe" value="Esquerdo"><label for="pe2">Esquerdo</label>
+      <input type="radio" id="pe3" name="pe" value="Ambidestro"><label for="pe3">Ambidestro</label>
+    </div>
+    <span class="error-msg">Selecione uma opção</span>
+  </div>
+
+  <div class="field">
+    <label>Posição preferida <span class="req">*</span></label>
+    <div class="radio-group" data-name="posicao">
+      <input type="radio" id="pos1" name="posicao" value="Goleiro" required><label for="pos1">Goleiro</label>
+      <input type="radio" id="pos2" name="posicao" value="Zagueiro"><label for="pos2">Zagueiro</label>
+      <input type="radio" id="pos3" name="posicao" value="Lateral Direito"><label for="pos3">Lateral D.</label>
+      <input type="radio" id="pos4" name="posicao" value="Lateral Esquerdo"><label for="pos4">Lateral E.</label>
+      <input type="radio" id="pos5" name="posicao" value="Volante"><label for="pos5">Volante</label>
+      <input type="radio" id="pos6" name="posicao" value="Meio-campo"><label for="pos6">Meio-campo</label>
+      <input type="radio" id="pos7" name="posicao" value="Ponta"><label for="pos7">Ponta</label>
+      <input type="radio" id="pos8" name="posicao" value="Atacante"><label for="pos8">Atacante</label>
+    </div>
+    <span class="error-msg">Selecione uma posição</span>
+  </div>
+
+  <div class="field-row-3">
+    <div class="field">
+      <label>Altura (cm) <span class="req">*</span></label>
+      <input type="number" name="altura" min="100" max="220" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>Peso (kg) <span class="req">*</span></label>
+      <input type="number" name="peso" min="20" max="150" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>Chuteira <span class="req">*</span></label>
+      <select name="chuteira" required>
+        <option value="">Selecione</option>
+        <option>32</option><option>33</option><option>34</option>
+        <option>35</option><option>36</option><option>37</option>
+        <option>38</option><option>39</option><option>40</option>
+        <option>41</option><option>42</option><option>43</option>
+        <option>44</option>
+      </select>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Tamanho da camisa <span class="req">*</span></label>
+      <div class="radio-group" data-name="camisa">
+        <input type="radio" id="c1" name="camisa" value="PP" required><label for="c1">PP</label>
+        <input type="radio" id="c2" name="camisa" value="P"><label for="c2">P</label>
+        <input type="radio" id="c3" name="camisa" value="M"><label for="c3">M</label>
+        <input type="radio" id="c4" name="camisa" value="G"><label for="c4">G</label>
+        <input type="radio" id="c5" name="camisa" value="GG"><label for="c5">GG</label>
+      </div>
+      <span class="error-msg">Selecione</span>
+    </div>
+    <div class="field">
+      <label>Tamanho do calção <span class="req">*</span></label>
+      <div class="radio-group" data-name="calcao">
+        <input type="radio" id="k1" name="calcao" value="PP" required><label for="k1">PP</label>
+        <input type="radio" id="k2" name="calcao" value="P"><label for="k2">P</label>
+        <input type="radio" id="k3" name="calcao" value="M"><label for="k3">M</label>
+        <input type="radio" id="k4" name="calcao" value="G"><label for="k4">G</label>
+        <input type="radio" id="k5" name="calcao" value="GG"><label for="k5">GG</label>
+      </div>
+      <span class="error-msg">Selecione</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Time atual <span class="hint">Deixe em branco se não joga em time</span></label>
+    <input type="text" name="timeAtual">
+  </div>
+
+  <div class="field">
+    <label>Times anteriores e tempo de prática</label>
+    <textarea name="timesAnteriores" placeholder="Ex: Joguei 3 anos no time da escola, 1 ano no Santos FC sub-13..."></textarea>
+  </div>
+
+  <div class="actions">
+    <div></div>
+    <button type="button" class="btn" onclick="nextStep(1)">Próximo →</button>
+  </div>
+</div>
+
+<!-- ===== PANEL 2 ===== -->
+<div class="panel" data-panel="2">
+  <div class="panel-header">
+    <div class="panel-num">Etapa 02 de 04</div>
+    <h2>Responsável</h2>
+    <p class="panel-desc">Dados do responsável legal do atleta.</p>
+  </div>
+
+  <div class="field">
+    <label>Nome completo do responsável <span class="req">*</span></label>
+    <input type="text" name="respNome" required>
+    <span class="error-msg">Obrigatório</span>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>CPF do responsável <span class="req">*</span></label>
+      <input type="text" name="respCpf" inputmode="numeric" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>RG do responsável <span class="req">*</span></label>
+      <input type="text" name="respRg" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Parentesco <span class="req">*</span></label>
+    <div class="radio-group" data-name="parentesco">
+      <input type="radio" id="pa1" name="parentesco" value="Pai" required><label for="pa1">Pai</label>
+      <input type="radio" id="pa2" name="parentesco" value="Mãe"><label for="pa2">Mãe</label>
+      <input type="radio" id="pa3" name="parentesco" value="Avô/Avó"><label for="pa3">Avô / Avó</label>
+      <input type="radio" id="pa4" name="parentesco" value="Tio/Tia"><label for="pa4">Tio / Tia</label>
+      <input type="radio" id="pa5" name="parentesco" value="Tutor legal"><label for="pa5">Tutor legal</label>
+      <input type="radio" id="pa6" name="parentesco" value="Outro"><label for="pa6">Outro</label>
+    </div>
+    <span class="error-msg">Selecione</span>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Telefone / WhatsApp <span class="req">*</span><span class="hint">Com DDD</span></label>
+      <input type="tel" name="respTel" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>Telefone alternativo</label>
+      <input type="tel" name="respTel2">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>E-mail <span class="req">*</span></label>
+    <input type="email" name="respEmail" required>
+    <span class="error-msg">E-mail válido obrigatório</span>
+  </div>
+
+  <div class="field">
+    <label>Endereço completo <span class="req">*</span><span class="hint">Rua, número, complemento, bairro</span></label>
+    <input type="text" name="endereco" required>
+    <span class="error-msg">Obrigatório</span>
+  </div>
+
+  <div class="field-row-3">
+    <div class="field">
+      <label>Cidade <span class="req">*</span></label>
+      <input type="text" name="cidade" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>UF <span class="req">*</span></label>
+      <input type="text" name="uf" maxlength="2" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>CEP <span class="req">*</span></label>
+      <input type="text" name="cep" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-ghost" onclick="prevStep(2)">← Voltar</button>
+    <button type="button" class="btn" onclick="nextStep(2)">Próximo →</button>
+  </div>
+</div>
+
+<!-- ===== PANEL 3 ===== -->
+<div class="panel" data-panel="3">
+  <div class="panel-header">
+    <div class="panel-num">Etapa 03 de 04</div>
+    <h2>Saúde</h2>
+    <p class="panel-desc">Informações essenciais para garantir a segurança do atleta.</p>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Tipo sanguíneo <span class="req">*</span></label>
+      <select name="sangue" required>
+        <option value="">Selecione</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option>
+        <option>O+</option><option>O-</option>
+        <option>Não sei</option>
+      </select>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>Convênio médico <span class="req">*</span><span class="hint">Escreva "SUS" se não tiver</span></label>
+      <input type="text" name="convenio" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Número da carteirinha do convênio</label>
+    <input type="text" name="carteirinha">
+  </div>
+
+  <div class="field">
+    <label>Alergias <span class="req">*</span><span class="hint">Medicamentos, alimentos, picadas. Escreva "Nenhuma" se não houver.</span></label>
+    <textarea name="alergias" required></textarea>
+    <span class="error-msg">Obrigatório</span>
+  </div>
+
+  <div class="field">
+    <label>Doenças ou condições crônicas <span class="req">*</span><span class="hint">Asma, cardíaco, diabetes, epilepsia. Escreva "Nenhuma" se não houver.</span></label>
+    <textarea name="doencas" required></textarea>
+    <span class="error-msg">Obrigatório</span>
+  </div>
+
+  <div class="field">
+    <label>Medicamentos em uso contínuo <span class="req">*</span><span class="hint">Liste com as dosagens. Escreva "Nenhum" se não houver.</span></label>
+    <textarea name="medicamentos" required></textarea>
+    <span class="error-msg">Obrigatório</span>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Contato de emergência — Nome <span class="req">*</span><span class="hint">Pessoa diferente do responsável principal</span></label>
+      <input type="text" name="emergNome" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+    <div class="field">
+      <label>Contato de emergência — Telefone <span class="req">*</span></label>
+      <input type="tel" name="emergTel" required>
+      <span class="error-msg">Obrigatório</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-ghost" onclick="prevStep(3)">← Voltar</button>
+    <button type="button" class="btn" onclick="nextStep(3)">Próximo →</button>
+  </div>
+</div>
+
+<!-- ===== PANEL 4 ===== -->
+<div class="panel" data-panel="4">
+  <div class="panel-header">
+    <div class="panel-num">Etapa 04 de 04</div>
+    <h2>Autorizações</h2>
+    <p class="panel-desc">Leia com atenção e confirme os termos abaixo.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-title">Autorização de participação</div>
+    <div class="term-text">Autorizo meu(minha) filho(a) a participar da avaliação do Club de Regatas Vasco da Gama, realizada em Barra do Sahy nos dias 30 e 31 de maio, incluindo deslocamento e permanência no local durante os dois dias do evento.</div>
+    <div class="checkbox-line">
+      <input type="checkbox" id="aut1" name="aut1" required>
+      <label for="aut1">Sim, autorizo a participação</label>
+    </div>
+  </div>
+
+  <div class="term">
+    <div class="term-title">Declaração de saúde</div>
+    <div class="term-text">Declaro que o(a) atleta está em boas condições físicas e de saúde para participar da avaliação, e que todas as informações médicas prestadas neste cadastro são verdadeiras e completas.</div>
+    <div class="checkbox-line">
+      <input type="checkbox" id="aut2" name="aut2" required>
+      <label for="aut2">Sim, declaro</label>
+    </div>
+  </div>
+
+  <div class="term">
+    <div class="term-title">Uso de imagem</div>
+    <div class="term-text">Autorizo o uso de imagem (fotos e vídeos) do(a) atleta pelo Vasco, pela escola e pela organização do evento para fins de divulgação em redes sociais, site e materiais institucionais.</div>
+    <div class="checkbox-line">
+      <input type="checkbox" id="aut3" name="aut3">
+      <label for="aut3">Sim, autorizo o uso de imagem</label>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Observações adicionais</label>
+    <textarea name="obs" placeholder="Qualquer informação relevante que não tenha sido perguntada"></textarea>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-ghost" onclick="prevStep(4)">← Voltar</button>
+    <button type="button" class="btn" onclick="submitForm()">Finalizar Cadastro ✓</button>
+  </div>
+</div>
+```
+
+  </form>
+</section>
+
+<!-- ============ SUMMARY ============ -->
+
+<section class="summary" id="summary">
+  <div class="summary-badge">
+    <div class="summary-check">✓</div>
+    <h2>Cadastro Completo</h2>
+    <p class="summary-desc">Confira os dados abaixo e envie o cadastro para a escola por WhatsApp.</p>
+  </div>
+
+  <div class="summary-data" id="summaryData"></div>
+
+  <div class="submit-options">
+    <button type="button" class="btn btn-full btn-whatsapp" onclick="sendWhatsapp()">
+      📱 Enviar pelo WhatsApp
+    </button>
+    <button type="button" class="btn btn-full btn-ghost" onclick="window.print()">
+      🖨 Imprimir / Salvar em PDF
+    </button>
+    <button type="button" class="btn btn-full btn-ghost" onclick="backToForm()">
+      ← Editar dados
+    </button>
+  </div>
+</section>
+
+<footer>
+  <strong>AVALIAÇÃO VASCO</strong> · Barra do Sahy · 30 e 31 de Maio
+</footer>
+
+<script>
+  // ⚠️ IMPORTANTE: Altere o número do WhatsApp abaixo pelo número da escola
+  // Formato: 55 + DDD + número (só números). Ex: 5511999999999
+  const WHATSAPP_ESCOLA = '5511999999999';
+
+  // ========= STEP NAV =========
+  function showStep(n) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.panel[data-panel="${n}"]`).classList.add('active');
+    document.querySelectorAll('.step').forEach(s => {
+      const num = parseInt(s.dataset.step);
+      s.classList.remove('active', 'done');
+      if (num < n) s.classList.add('done');
+      if (num === n) s.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validatePanel(n) {
+    const panel = document.querySelector(`.panel[data-panel="${n}"]`);
+    let ok = true;
+    panel.querySelectorAll('input[required], select[required], textarea[required]').forEach(el => {
+      const field = el.closest('.field');
+      if (el.type === 'radio') {
+        const group = panel.querySelector(`.radio-group[data-name="${el.name}"]`);
+        const any = panel.querySelector(`input[name="${el.name}"]:checked`);
+        if (!any) {
+          group.classList.add('has-error');
+          group.closest('.field').classList.add('has-error');
+          ok = false;
+        } else {
+          group.classList.remove('has-error');
+          group.closest('.field').classList.remove('has-error');
+        }
+      } else {
+        if (!el.value.trim() || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+          el.classList.add('error');
+          field.classList.add('has-error');
+          ok = false;
+        } else {
+          el.classList.remove('error');
+          field.classList.remove('has-error');
+        }
+      }
+    });
+    return ok;
+  }
+
+  function nextStep(n) {
+    if (!validatePanel(n)) return;
+    showStep(n + 1);
+  }
+
+  function prevStep(n) {
+    showStep(n - 1);
+  }
+
+  // ========= SUBMIT =========
+  function submitForm() {
+    if (!validatePanel(4)) return;
+
+    // Validar checkboxes obrigatórios
+    if (!document.getElementById('aut1').checked || !document.getElementById('aut2').checked) {
+      alert('⚠️ As autorizações obrigatórias precisam ser marcadas para continuar.');
+      return;
+    }
+
+    const data = collectData();
+    renderSummary(data);
+
+    document.getElementById('formSection').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
+    document.getElementById('summary').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function backToForm() {
+    document.getElementById('summary').classList.remove('active');
+    document.getElementById('formSection').style.display = 'block';
+    document.querySelector('.progress-wrap').style.display = 'block';
+    showStep(4);
+  }
+
+  function collectData() {
+    const f = document.getElementById('regForm');
+    const fd = new FormData(f);
+    const d = {};
+    for (let [k, v] of fd.entries()) d[k] = v;
+    d.aut1 = document.getElementById('aut1').checked ? 'Sim' : 'Não';
+    d.aut2 = document.getElementById('aut2').checked ? 'Sim' : 'Não';
+    d.aut3 = document.getElementById('aut3').checked ? 'Sim' : 'Não';
+    return d;
+  }
+
+  function formatDate(d) {
+    if (!d) return '—';
+    const [y, m, day] = d.split('-');
+    return `${day}/${m}/${y}`;
+  }
+
+  function renderSummary(d) {
+    const html = `
+      <h3>Dados do Atleta</h3>
+      <div class="summary-row"><span class="summary-key">Nome</span><span class="summary-val">${d.nome||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Nascimento</span><span class="summary-val">${formatDate(d.nascimento)}</span></div>
+      <div class="summary-row"><span class="summary-key">CPF</span><span class="summary-val">${d.cpf||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Posição</span><span class="summary-val">${d.posicao||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Pé dominante</span><span class="summary-val">${d.pe||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Altura / Peso</span><span class="summary-val">${d.altura||'—'}cm · ${d.peso||'—'}kg</span></div>
+      <div class="summary-row"><span class="summary-key">Chuteira</span><span class="summary-val">${d.chuteira||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Camisa / Calção</span><span class="summary-val">${d.camisa||'—'} · ${d.calcao||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Time atual</span><span class="summary-val">${d.timeAtual||'Sem time'}</span></div>
+      ${d.timesAnteriores ? `<div class="summary-row"><span class="summary-key">Histórico</span><span class="summary-val">${d.timesAnteriores}</span></div>` : ''}
+
+      <h3>Responsável</h3>
+      <div class="summary-row"><span class="summary-key">Nome</span><span class="summary-val">${d.respNome||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">CPF / RG</span><span class="summary-val">${d.respCpf||'—'} · ${d.respRg||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Parentesco</span><span class="summary-val">${d.parentesco||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Telefone</span><span class="summary-val">${d.respTel||'—'}${d.respTel2 ? ' · '+d.respTel2 : ''}</span></div>
+      <div class="summary-row"><span class="summary-key">E-mail</span><span class="summary-val">${d.respEmail||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Endereço</span><span class="summary-val">${d.endereco||'—'}, ${d.cidade||''}/${d.uf||''} — CEP ${d.cep||'—'}</span></div>
+
+      <h3>Saúde</h3>
+      <div class="summary-row"><span class="summary-key">Tipo sanguíneo</span><span class="summary-val">${d.sangue||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Convênio</span><span class="summary-val">${d.convenio||'—'}${d.carteirinha ? ' · '+d.carteirinha : ''}</span></div>
+      <div class="summary-row"><span class="summary-key">Alergias</span><span class="summary-val">${d.alergias||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Doenças</span><span class="summary-val">${d.doencas||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Medicamentos</span><span class="summary-val">${d.medicamentos||'—'}</span></div>
+      <div class="summary-row"><span class="summary-key">Emergência</span><span class="summary-val">${d.emergNome||'—'} · ${d.emergTel||'—'}</span></div>
+
+      <h3>Autorizações</h3>
+      <div class="summary-row"><span class="summary-key">Participação</span><span class="summary-val">${d.aut1}</span></div>
+      <div class="summary-row"><span class="summary-key">Declaração de saúde</span><span class="summary-val">${d.aut2}</span></div>
+      <div class="summary-row"><span class="summary-key">Uso de imagem</span><span class="summary-val">${d.aut3}</span></div>
+      ${d.obs ? `<div class="summary-row"><span class="summary-key">Observações</span><span class="summary-val">${d.obs}</span></div>` : ''}
+    `;
+    document.getElementById('summaryData').innerHTML = html;
+  }
+
+  function sendWhatsapp() {
+    const d = collectData();
+    const msg = `*CADASTRO - AVALIAÇÃO VASCO*\n_Barra do Sahy · 30 e 31 de Maio_\n\n` +
+      `*ATLETA*\n` +
+      `Nome: ${d.nome}\n` +
+      `Nascimento: ${formatDate(d.nascimento)}\n` +
+      `CPF: ${d.cpf}\n` +
+      `Posição: ${d.posicao}\n` +
+      `Pé dominante: ${d.pe}\n` +
+      `Altura/Peso: ${d.altura}cm · ${d.peso}kg\n` +
+      `Chuteira: ${d.chuteira}\n` +
+      `Camisa/Calção: ${d.camisa} · ${d.calcao}\n` +
+      `Time atual: ${d.timeAtual || 'Sem time'}\n` +
+      (d.timesAnteriores ? `Histórico: ${d.timesAnteriores}\n` : '') +
+      `\n*RESPONSÁVEL*\n` +
+      `Nome: ${d.respNome}\n` +
+      `CPF: ${d.respCpf} · RG: ${d.respRg}\n` +
+      `Parentesco: ${d.parentesco}\n` +
+      `Tel: ${d.respTel}` + (d.respTel2 ? ` · ${d.respTel2}` : '') + `\n` +
+      `E-mail: ${d.respEmail}\n` +
+      `Endereço: ${d.endereco}, ${d.cidade}/${d.uf} — CEP ${d.cep}\n` +
+      `\n*SAÚDE*\n` +
+      `Tipo sanguíneo: ${d.sangue}\n` +
+      `Convênio: ${d.convenio}` + (d.carteirinha ? ` (${d.carteirinha})` : '') + `\n` +
+      `Alergias: ${d.alergias}\n` +
+      `Doenças: ${d.doencas}\n` +
+      `Medicamentos: ${d.medicamentos}\n` +
+      `Emergência: ${d.emergNome} · ${d.emergTel}\n` +
+      `\n*AUTORIZAÇÕES*\n` +
+      `Participação: ${d.aut1}\n` +
+      `Declaração de saúde: ${d.aut2}\n` +
+      `Uso de imagem: ${d.aut3}\n` +
+      (d.obs ? `\n*OBSERVAÇÕES*\n${d.obs}` : '');
+
+    const url = `https://wa.me/${WHATSAPP_ESCOLA}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+
+  // Limpar erros ao digitar
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      el.classList.remove('error');
+      el.closest('.field')?.classList.remove('has-error');
+    });
+    el.addEventListener('change', () => {
+      el.classList.remove('error');
+      el.closest('.field')?.classList.remove('has-error');
+      const group = el.closest('.radio-group');
+      if (group) group.classList.remove('has-error');
+    });
+  });
+</script>
+
+</body>
+</html>
